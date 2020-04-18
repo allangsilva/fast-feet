@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import Sequelize, { Model } from 'sequelize';
 
 class User extends Model {
@@ -14,6 +15,10 @@ class User extends Model {
         tableName: 'users',
       },
     );
+  }
+
+  async checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
   }
 }
 
